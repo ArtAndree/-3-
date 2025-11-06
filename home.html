@@ -1,0 +1,297 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Адаптивный сайт</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Archivo+Black&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            background-image: url(./fon.jpg); 
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+            transition: all 0.3s ease;
+            min-height: 100vh;
+        }
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.5);
+            z-index: -1;
+        }
+
+        .device-selector {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            background-color: rgba(51, 51, 51, 0.9);
+            color: white;
+            padding: 10px;
+            z-index: 1000;
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            flex-wrap: wrap;
+        }
+
+        .device-option {
+            padding: 8px 15px;
+            background-color: #555;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        .device-option:hover, .device-option.active {
+            background-color: #777;
+        }
+
+        .container {
+            margin-top: 60px;
+            position: relative;
+            transition: all 0.3s ease;
+        }
+
+        .hero-section {
+            height: 40vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            color: white;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7);
+        }
+
+        .hero-text {
+            font-family: 'Archivo Black', sans-serif;
+            font-size: 3rem;
+            text-align: center;
+            max-width: 80%;
+        }
+
+        .grid-container {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 20px;
+            padding: 40px 20px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .grid-item {
+            background-color: rgba(255, 255, 255, 0.9);
+            border-radius: 15px;
+            padding: 30px 20px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+            position: relative;
+            transition: transform 0.3s ease;
+        }
+
+        .grid-item:hover {
+            transform: translateY(-5px);
+        }
+
+        .number {
+            font-size: 4rem;
+            font-weight: bold;
+            color: #FFD700; 
+            margin-bottom: 15px;
+        }
+
+        .item-text {
+            margin-bottom: 20px;
+            line-height: 1.5;
+        }
+
+        .learn-more {
+            color: #333;
+            text-decoration: none;
+            font-weight: bold;
+            margin-bottom: 5px;
+            position: relative;
+            cursor: pointer;
+        }
+
+        .underline {
+            height: 2px;
+            width: 0;
+            background-color: #FFD700;
+            transition: all 0.3s ease;
+            margin: 0 auto;
+        }
+
+        .learn-more:hover + .underline,
+        .learn-more:focus + .underline {
+            width: 100%;
+            background-color: black;
+        }
+
+
+        body.desktop .container {
+            max-width: 100%;
+        }
+
+        body.laptop .container {
+            max-width: 1200px;
+            margin: 60px auto 0;
+        }
+
+        body.tablet .container {
+            max-width: 768px;
+            margin: 60px auto 0;
+        }
+
+        body.tablet .grid-container {
+            grid-template-columns: repeat(2, 1fr);
+        }
+
+        body.tablet .hero-text {
+            font-size: 2.5rem;
+        }
+
+        body.phone .container {
+            max-width: 375px;
+            margin: 60px auto 0;
+        }
+
+        body.phone .grid-container {
+            grid-template-columns: 1fr;
+        }
+
+        body.phone .hero-text {
+            font-size: 2rem;
+        }
+
+        body.phone-landscape .container {
+            max-width: 667px;
+            margin: 60px auto 0;
+        }
+
+        body.phone-landscape .grid-container {
+            grid-template-columns: repeat(2, 1fr);
+        }
+
+        body.phone-landscape .hero-text {
+            font-size: 1.8rem;
+        }
+
+        .container {
+            animation: fadeIn 0.5s ease;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0.8; }
+            to { opacity: 1; }
+        }
+
+        @media (max-width: 768px) {
+            .device-selector {
+                padding: 5px;
+                gap: 10px;
+            }
+            
+            .device-option {
+                padding: 5px 10px;
+                font-size: 0.9rem;
+            }
+            
+            .hero-text {
+                font-size: 2rem;
+            }
+        }
+    </style>
+</head>
+<body class="desktop">
+    <div class="device-selector">
+        <div class="device-option active" data-device="desktop">Монитор</div>
+        <div class="device-option" data-device="laptop">Ноутбук</div>
+        <div class="device-option" data-device="tablet">Планшет</div>
+        <div class="device-option" data-device="phone">Телефон</div>
+        <div class="device-option" data-device="phone-landscape">Телефон (горизонтальный)</div>
+    </div>
+
+    <div class="container">
+        <section class="hero-section">
+            <h1 class="hero-text">Design and Development</h1>
+        </section>
+
+        <section class="grid-container">
+            <div class="grid-item">
+                <div class="number">1</div>
+                <p class="item-text">Инновационные решения для вашего бизнеса с использованием передовых технологий.</p>
+                <a class="learn-more">Learn more</a>
+                <div class="underline"></div>
+            </div>
+            
+            <div class="grid-item">
+                <div class="number">2</div>
+                <p class="item-text">Профессиональный подход к созданию уникального пользовательского опыта.</p>
+                <a class="learn-more">Learn more</a>
+                <div class="underline"></div>
+            </div>
+
+            <div class="grid-item">
+                <div class="number">3</div>
+                <p class="item-text">Современный дизайн, который привлекает внимание и улучшает взаимодействие.</p>
+                <a class="learn-more">Learn more</a>
+                <div class="underline"></div>
+            </div>
+            
+            <div class="grid-item">
+                <div class="number">4</div>
+                <p class="item-text">Адаптивные решения, которые работают на любом устройстве и в любой ситуации.</p>
+                <a class="learn-more">Learn more</a>
+                <div class="underline"></div>
+            </div>
+            
+            <div class="grid-item">
+                <div class="number">5</div>
+                <p class="item-text">Оптимизация производительности для быстрой загрузки и плавной работы.</p>
+                <a class="learn-more">Learn more</a>
+                <div class="underline"></div>
+            </div>
+            
+            <div class="grid-item">
+                <div class="number">6</div>
+                <p class="item-text">Поддержка и развитие проектов на всех этапах их жизненного цикла.</p>
+                <a class="learn-more">Learn more</a>
+                <div class="underline"></div>
+            </div>
+        </section>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const deviceOptions = document.querySelectorAll('.device-option');
+            
+            deviceOptions.forEach(option => {
+                option.addEventListener('click', function() {
+                    deviceOptions.forEach(opt => opt.classList.remove('active'));
+                    this.classList.add('active');
+                    const device = this.getAttribute('data-device');
+                    document.body.className = '';
+                    document.body.classList.add(device);
+                });
+            });
+        });
+    </script>
+</body>
+</html>
